@@ -14,7 +14,8 @@ def fetch_git_changes(repo_path="."):
     try:
         system_message = """
             You are a helpful assistant the produce always as output a commit message using the standar of https://www.conventionalcommits.org/en/v1.0.0/.
-            Do not include author info, just include a list describing the changes with format <type>(<scope>): <short summary>. 
+            Do not include author info, just include a list describing the changes with the following format <emoji> <type>(<scope>): <short summary>. 
+            example: 🐛 fix(gitmess): Fix typo in commit message format. Do not duplicate messages.
             To formulate your output you will have access to the giff in the following text provided by the git diff command.
         """
         messages = [
@@ -27,21 +28,26 @@ def fetch_git_changes(repo_path="."):
         diff = repo.git.diff('HEAD')
         if diff:
             messages.append(SystemMessage(content=f"{diff}"))
+            ## print a beautiful animation while the model is thinking
+            print("Analyzing...🤔")
             response = chat_model.predict_messages(messages).content
+            ## clear the last print
+            print("\033[A                             \033[A")
+
             ## ask the user for confirmation of the message at the console
             print(response)
             ## ask the user for confirmation of the message at the console
-            user_input = input("Is the message correct? [Y/n] ")
+            user_input = input("\nIs the message correct? [Y/n] ")
             if user_input.lower() == "y":
                 ## commit the changes
                 repo.git.add(update=True)
                 repo.git.commit(message=response)
-                return f"Se ha realizado el commit con el mensaje: {response}"
+                return f"Commit generated successfully"
             else:
-                return "No se ha realizado el commit."
-        return diff if diff else "No hay cambios detectados."
+                return "Commit canceled"
+        return diff if diff else "No changes"
     except Exception as e:
-        return f"Error al obtener cambios de git: {e}"
+        return f"Error: {e}"
 
 if __name__ == "__main__":
     # Imprimir las diferencias
