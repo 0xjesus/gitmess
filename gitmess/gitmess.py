@@ -45,9 +45,9 @@ def fetch_git_changes(repo_path="."):
                 ## ask the user if he wants to push the changes
                 user_input = input("\nDo you want to push the changes? [Y/n] ")
                 if user_input.lower() == "y":
-                    res = repo.git.push()
+                    repo.git.push()
                     ## show the output of the push
-                    print(res)
+                    print(repo.git.log('--oneline', '-n', '1'))
                     return f"\nCommit generated and pushed successfully"
                 else:
                     return f"Commit generated successfully"
