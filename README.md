@@ -3,6 +3,25 @@
 
 ## 🚀 gitmess: Automated Git Commit Messages with GPT! 🚀
 
+### 📝 Prerequisites:
+
+Before using `gitmess`, you must set up your OpenAI API key:
+
+#### Linux/macOS:
+```bash
+export OPENAI_API_KEY=<your_api_key>
+```
+
+#### Windows (Command Prompt):
+```bash
+set OPENAI_API_KEY=<your_api_key>
+```
+
+#### Windows (PowerShell):
+```powershell
+$env:OPENAI_API_KEY="<your_api_key>"
+```
+
 ### 🖥 Usage:
 
 #### Generating an automatic commit message:
