@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "gitmess"
-version = "0.1.4"
+version = "0.1.5"
 description = ""
 authors = ["0xjesus <pdlgmcn@protonmail.com>"]
 readme = "README.md"
