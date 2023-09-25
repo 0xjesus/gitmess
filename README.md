@@ -13,7 +13,7 @@ gm
 #### Activating Auto-Push:
 After committing, you can choose to automatically push your commits to the repository. To activate the auto-push feature, use:
 ```bash
-gm --push-auto
+gm --set-push-auto
 ```
 
 #### Checking the installed version:
