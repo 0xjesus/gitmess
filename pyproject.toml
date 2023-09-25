@@ -17,5 +17,5 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-gm = 'gitmess.gitmess:fetch_git_changes'
+gm = 'gitmess:main'
 

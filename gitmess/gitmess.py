@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import git
 import logging
 import os
@@ -77,7 +79,7 @@ def fetch_git_changes(repo_path=".", push_auto=False):
         raise e
 
 
-if __name__ == "__main__":
+def main():
     args = get_args()
     config = load_config()
 
@@ -99,4 +101,7 @@ if __name__ == "__main__":
     push_auto = config.get('push_auto', False)
 
     print(fetch_git_changes(push_auto=push_auto))
+
+if __name__ == "__main__":
+    main()
 
