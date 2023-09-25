@@ -3,6 +3,28 @@
 
 ## 🚀 gitmess: Automated Git Commit Messages with GPT! 🚀
 
+### 🖥 Usage:
+
+#### Generating an automatic commit message:
+```bash
+gm
+```
+
+#### Activating Auto-Push:
+After committing, you can choose to automatically push your commits to the repository. To activate the auto-push feature, use:
+```bash
+gm --push-auto
+```
+
+#### Checking the installed version:
+To ensure that gitmess has been installed correctly and to check its version, use:
+```bash
+gm -v
+```
+This will display the currently installed version of gitmess.
+
+---
+
 ### 🎯 Description
 
 **gitmess** is a revolutionary tool designed to supercharge developers' git workflows by automatically generating commit messages with the power of GPT. Keeping with the `conventionalcommits v1.0.0` standard, gitmess ensures that your commits remain consistent, meaningful, and time-efficient!
