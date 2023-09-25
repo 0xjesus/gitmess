@@ -1,6 +1,7 @@
 import git
 import logging
 import os
+import argparse
 from langchain.chat_models import ChatOpenAI
 from langchain.schema import HumanMessage, AIMessage, SystemMessage
 logging.basicConfig(level=logging.ERROR)
@@ -9,8 +10,15 @@ openai_key = os.getenv("OPEN_AI_KEY")
 chat_model = ChatOpenAI(
     model="gpt-3.5-turbo"
 )
+LIBRARY_VERSION = "0.1.0"  # Remember to update this version as needed.
 
-def fetch_git_changes(repo_path="."):
+def get_args():
+    parser = argparse.ArgumentParser(description="Git helper using OpenAI.")
+    parser.add_argument('-v', '--version', action='store_true', help="Show library version and exit.")
+    parser.add_argument('--push-auto', action='store_true', help="Ask to confirm auto push after committing.")
+    return parser.parse_args()
+
+def fetch_git_changes(repo_path=".", push_auto=False):
     try:
         system_message = """
             You are a helpful assistant the produce always as output a commit message using the standar of https://www.conventionalcommits.org/en/v1.0.0/.
@@ -42,11 +50,8 @@ def fetch_git_changes(repo_path="."):
                 ## commit the changes
                 repo.git.add(update=True)
                 repo.git.commit(message=response)
-                ## ask the user if he wants to push the changes
-                user_input = input("\nDo you want to push the changes? [Y/n] ")
-                if user_input.lower() == "y":
+                if push_auto or input("\nDo you want to push the changes? [Y/n] ").lower() == "y":
                     repo.git.push()
-                    ## show the output of the push
                     print(repo.git.log('--oneline', '-n', '1'))
                     return f"\nCommit generated and pushed successfully"
                 else:
@@ -55,8 +60,24 @@ def fetch_git_changes(repo_path="."):
                 return "Commit canceled"
         return diff if diff else "No changes"
     except Exception as e:
-        return f"Error: {e}"
+        raise e
+
 
 if __name__ == "__main__":
-    # Imprimir las diferencias
-    print(fetch_git_changes())
+    args = get_args()
+
+    # Si el usuario sólo quiere ver la versión
+    if args.version:
+        print(f"📜 Gitmess version: {LIBRARY_VERSION}")
+        exit()
+
+    # Si el usuario activa el flag de push-auto
+    if args.push_auto:
+        confirmation = input("You've chosen to auto-push. Are you sure you want to enable this? [Y/n] ")
+        if confirmation.lower() == 'n':
+            args.push_auto = False
+
+    # Si el usuario no ha proporcionado ningún argumento, ejecuta fetch_git_changes
+    if not any(vars(args).values()):
+        print(fetch_git_changes(push_auto=args.push_auto))
+
