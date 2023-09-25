@@ -11,7 +11,7 @@ if errorlevel 1 (
 )
 
 :: Install your package
-pip install gitmess==0.1.2
+pip install gitmess --upgrade
 
 echo mipaquete has been successfully installed!
 

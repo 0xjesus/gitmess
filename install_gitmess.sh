@@ -11,7 +11,8 @@ if ! command -v pip &>/dev/null; then
 fi
 
 # Install your package
-pip install gitmess==0.1.2
+## use latest version
+pip install gitmess --upgrade
 
 # Ensure the gm command is globally available
 # This assumes that gitmess provides an entry point named gm after installation.

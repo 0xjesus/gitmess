@@ -11,8 +11,7 @@ if ! command -v pip &> /dev/null; then
 fi
 
 # Instala tu paquete
-pip install gitmess==0.1.0
-
+pip install gitmess --upgrade
 # Comprueba si ~/.local/bin está en PATH
 if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
     echo "Adding $HOME/.local/bin to PATH in .bashrc"
