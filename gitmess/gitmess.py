@@ -14,7 +14,7 @@ openai_key = os.getenv("OPEN_AI_KEY")
 chat_model = ChatOpenAI(
     model="gpt-3.5-turbo"
 )
-LIBRARY_VERSION = "0.1.0"  # Remember to update this version as needed.
+LIBRARY_VERSION = "0.1.4"  # Remember to update this version as needed.
 
 CONFIG_PATH = os.path.join(os.path.expanduser('~'), '.gitmessconfig')
 
