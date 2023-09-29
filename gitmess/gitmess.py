@@ -10,11 +10,11 @@ from langchain.schema import HumanMessage, AIMessage, SystemMessage
 
 logging.basicConfig(level=logging.ERROR)
 
-openai_key = os.getenv("OPEN_AI_KEY")
+openai_key = os.getenv("OPENAI_API_KEY")
 chat_model = ChatOpenAI(
     model="gpt-3.5-turbo"
 )
-LIBRARY_VERSION = "0.1.5"  # Remember to update this version as needed.
+LIBRARY_VERSION = "0.1.6"  # Remember to update this version as needed.
 
 CONFIG_PATH = os.path.join(os.path.expanduser('~'), '.gitmessconfig')
 
